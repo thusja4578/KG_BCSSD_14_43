@@ -1,45 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-inst..." xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web..." id="WebApp_ID" version="3.0">
 
 
 <servlet>
-<servlet-name>addvehicle</servlet-name>
-<servlet-class>servlet.addvehicle</servlet-class>
-
-</servlet>
-
-<servlet-mapping>
-<servlet-name>addvehicle</servlet-name>
-<url-pattern>/addvehiclee</url-pattern> 
-</servlet-mapping>
-
-<servlet>
-<servlet-name>adddriver</servlet-name>
-<servlet-class>servlet.adddriver</servlet-class>
-
-</servlet>
-
-<servlet-mapping>
-<servlet-name>adddriver</servlet-name>
-<url-pattern>/adddriverr</url-pattern> 
-</servlet-mapping>
-
-<servlet>
-<servlet-name>assign</servlet-name>
-<servlet-class>servlet.assign</servlet-class>
-
-</servlet>
-
-<servlet-mapping>
-<servlet-name>assign</servlet-name>
-<url-pattern>/assignn</url-pattern> 
-</servlet-mapping>
-
-<servlet>
 <servlet-name>addassign</servlet-name>
 <servlet-class>servlet.addassign</servlet-class>
-
 </servlet>
 
 <servlet-mapping>
@@ -48,9 +13,48 @@
 </servlet-mapping>
 
 <servlet>
+<servlet-name>assign</servlet-name>
+<servlet-class>servlet.assign</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>assign</servlet-name>
+<url-pattern>/assignn</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>BillServlet</servlet-name>
+<servlet-class>servlet.BillServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>BillServlet</servlet-name>
+<url-pattern>/Billservlett</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>drivertb</servlet-name>
+<servlet-class>servlet.drivertb</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>drivertb</servlet-name>
+<url-pattern>/drivertbb</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>adddriver</servlet-name>
+<servlet-class>servlet.adddriver</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>adddriver</servlet-name>
+<url-pattern>/adddriverr</url-pattern> 
+</servlet-mapping>
+
+<servlet>
 <servlet-name>logdriver</servlet-name>
 <servlet-class>servlet.logdriver</servlet-class>
-
 </servlet>
 
 <servlet-mapping>
@@ -59,32 +63,18 @@
 </servlet-mapping>
 
 <servlet>
-<servlet-name>drivertb</servlet-name>
-<servlet-class>servlet.drivertb</servlet-class>
-
+<servlet-name>logvehicle</servlet-name>
+<servlet-class>servlet.logvehicle</servlet-class>
 </servlet>
 
 <servlet-mapping>
-<servlet-name>drivertb</servlet-name>
-<url-pattern>/drivertbb</url-pattern> 
-</servlet-mapping>
-
-
-<servlet>
-<servlet-name>deldriver</servlet-name>
-<servlet-class>servlet.deldriver</servlet-class>
-
-</servlet>
-
-<servlet-mapping>
-<servlet-name>deldriver</servlet-name>
-<url-pattern>/deldriverr</url-pattern> 
+<servlet-name>logvehicle</servlet-name>
+<url-pattern>/logvehiclee</url-pattern> 
 </servlet-mapping>
 
 <servlet>
 <servlet-name>updatedriver</servlet-name>
 <servlet-class>servlet.updatedriver</servlet-class>
-
 </servlet>
 
 <servlet-mapping>
@@ -93,21 +83,18 @@
 </servlet-mapping>
 
 <servlet>
-<servlet-name>logvehicle</servlet-name>
-<servlet-class>servlet.logvehicle</servlet-class>
-
+<servlet-name>updatevehicle</servlet-name>
+<servlet-class>servlet.updatevehicle</servlet-class>
 </servlet>
 
 <servlet-mapping>
-<servlet-name>logvehicle</servlet-name>
-<url-pattern>/logvehiclee</url-pattern> 
+<servlet-name>updatevehicle</servlet-name>
+<url-pattern>/updatevehiclee</url-pattern> 
 </servlet-mapping>
-
 
 <servlet>
 <servlet-name>vehicletb</servlet-name>
 <servlet-class>servlet.vehicletb</servlet-class>
-
 </servlet>
 
 <servlet-mapping>
@@ -116,9 +103,28 @@
 </servlet-mapping>
 
 <servlet>
+<servlet-name>addvehicle</servlet-name>
+<servlet-class>servlet.addvehicle</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>addvehicle</servlet-name>
+<url-pattern>/addvehiclee</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>deldriver</servlet-name>
+<servlet-class>servlet.deldriver</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>deldriver</servlet-name>
+<url-pattern>/deldriverr</url-pattern> 
+</servlet-mapping>
+
+<servlet>
 <servlet-name>delvehicle</servlet-name>
 <servlet-class>servlet.delvehicle</servlet-class>
-
 </servlet>
 
 <servlet-mapping>
@@ -127,14 +133,72 @@
 </servlet-mapping>
 
 <servlet>
-<servlet-name>updatevehicle</servlet-name>
-<servlet-class>servlet.updatevehicle</servlet-class>
-
+<servlet-name>add</servlet-name>
+<servlet-class>servlet.add</servlet-class>
 </servlet>
 
 <servlet-mapping>
-<servlet-name>updatevehicle</servlet-name>
-<url-pattern>/updatevehiclee</url-pattern> 
+<servlet-name>add</servlet-name>
+<url-pattern>/addd</url-pattern> 
 </servlet-mapping>
 
+<servlet>
+<servlet-name>logcus</servlet-name>
+<servlet-class>servlet.logcus</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>logcus</servlet-name>
+<url-pattern>/logcuss</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>usertb</servlet-name>
+<servlet-class>servlet.usertb</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>usertb</servlet-name>
+<url-pattern>/usertbb</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>deluser</servlet-name>
+<servlet-class>servlet.deluser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>deluser</servlet-name>
+<url-pattern>/deluserr</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>booktb</servlet-name>
+<servlet-class>servlet.booktb</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>booktb</servlet-name>
+<url-pattern>/booktbb</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>delbk</servlet-name>
+<servlet-class>servlet.delbk</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>delbk</servlet-name>
+<url-pattern>/delbkk</url-pattern> 
+</servlet-mapping>
+
+<servlet>
+<servlet-name>helpfactory</servlet-name>
+<servlet-class>servlet.helpfactory</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>helpfactory</servlet-name>
+<url-pattern>/helpfactoryy</url-pattern> 
+</servlet-mapping>
 </web-app>

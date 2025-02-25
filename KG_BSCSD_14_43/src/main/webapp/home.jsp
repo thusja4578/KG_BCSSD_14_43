@@ -10,11 +10,23 @@
 <form action="assign" method="post">
 <button type="submit">all assign</button>
 </form>
+
+
 <form action="drivertb" method="post">
 <button type="submit">all driver</button>
 </form>
+
 <form action="vehicletb" method="post">
 <button type="submit">all vehicle</button>
+</form>
+
+
+<form action="usertb" method="post">
+<button type="submit">all users</button>
+</form>
+
+<form action="booktb" method="post">
+<button type="submit">all bookings</button>
 </form>
 </body>
 </html>

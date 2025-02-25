@@ -10,8 +10,11 @@ import java.util.List;
 
 import controller.database;
 import model.Assignment;
+import model.Bill;
 import model.Driver;
 import model.Vehicle;
+import model.help;
+import model.register;
 
 
 
@@ -337,4 +340,175 @@ public class web_service {
 		            return false;
 		        }
 		    }
+	        //*****************************************************************************************************************************************************************
+	        //register user
+
+	    	public boolean reg_user(register app1) throws ClassNotFoundException {
+	            try {
+	                String query = "INSERT INTO reg (registration_number, name, address, nic, username, password) VALUES ('"
+	                        + app1.getRegistration_number() + "','" + app1.getName() + "','" + app1.getAddress() + "','"
+	                        + app1.getNic() + "','" + app1.getUsername() + "','" + app1.getPassword() + "')";
+	                
+	                Statement state = database.getcon().createStatement();
+	                state.executeUpdate(query);
+	                return true; // Registration successful
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	                return false; // Registration failed
+	            }
+	        }
+	    	//**************************************************************************************************************
+	    	//user log 
+	    	public boolean validate(register user_log)
+	 		{
+	 			try {
+	 				
+	 				String query = "select * from reg where username ='" + user_log.getUsername() + "' and password='" + user_log.getPassword() + "'";
+	 		Statement statement=database.getcon().createStatement();
+	 		ResultSet rs=statement.executeQuery(query);
+
+	 				if(rs.next()) { //next kiyana eken enne boolean value ekak
+	 					return true; //rs ekata data samanam true kiyala return karanawa
+	 				}
+	 			} catch (Exception e) {
+	 				
+	 				e.printStackTrace();
+	 			}
+	 			return false;
+	 		}
+	 	 //*********************************************************************************************************************************************
+	 	 //getone
+	 	 public register getone(register user_log)
+	 		{
+	 			try {
+	 				
+	 				String query = "select * from reg where username ='" + user_log.getUsername() + "' and password='" + user_log.getPassword() + "'";
+	 		Statement statement=database.getcon().createStatement();
+	 		ResultSet rs=statement.executeQuery(query);
+
+	 				if(rs.next()) { //next kiyana eken enne boolean value ekak
+	 					
+	 					
+	 					user_log.setRegistration_number(rs.getString("registration_number"));
+	 					user_log.setName(rs.getString("name"));
+	 					user_log.setAddress(rs.getString("address"));
+	 					user_log.setNic(rs.getInt("nic"));
+	 					user_log.setUsername(rs.getString("username"));
+	 					user_log.setPassword(rs.getString("password"));
+	 				
+	 					return user_log;
+	 				}
+	 			} catch (Exception e) {
+	 				
+	 				e.printStackTrace();
+	 			}
+	 			return null;
+	 		}
+	    
+	        //***************************************************************************************************************
+	 	 //register table
+	 	   public ArrayList<register> getallusers()
+	 				{
+	 					try {
+	 						ArrayList<register> listcus=new ArrayList<register>();
+	 						String query="select*from reg";
+	 						Statement statement=database.getcon().createStatement();
+	 						ResultSet rs=statement.executeQuery(query);
+	 						while(rs.next())
+	 						{
+	 							
+	 							
+	 							
+	 						register cus12=new register();
+	 							cus12.setRegistration_number(rs.getString("registration_number"));
+	 							cus12.setName(rs.getString("name"));
+	 							cus12.setAddress(rs.getString("address"));
+	 							cus12.setNic(rs.getInt("nic"));
+	 							cus12.setUsername(rs.getString("username"));
+	 							cus12.setPassword(rs.getString("password"));
+	 							
+	 							
+	 							listcus.add(cus12);
+	 						}
+	 						return listcus;
+	 					} catch (Exception e) {
+	 						e.printStackTrace();
+	 						return null;
+	 					}
+	 				}
+	 	   //****************************************************************************************************************
+	 	   //delete register
+	 	  public void del_user(register dell)
+			{
+				try {
+					String query="delete from reg where registration_number='"+dell.getRegistration_number()+"'";
+					Statement statet=database.getcon().createStatement();
+					statet.executeUpdate(query);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+	 	  //****************************************************************************************************************
+	 	  //booking table
+	 	 public ArrayList<Bill> getallbookings()
+			{
+				try {
+					ArrayList<Bill> listcus=new ArrayList<Bill>();
+					String query="select*from bill";
+					Statement statement=database.getcon().createStatement();
+					ResultSet rs=statement.executeQuery(query);
+					while(rs.next())
+					{
+						
+						
+						
+					Bill app11=new Bill(query, query, query, 0, query, 0, 0);
+					app11.setBookingNumber(rs.getString("bookingNumber"));
+					app11.setCustomerName(rs.getString("customerName"));
+					app11.setAddress(rs.getString("address"));
+					app11.setTelephone(rs.getInt("telephone"));
+					app11.setDestinationAddress(rs.getString("destinationAddress"));
+					app11.setDistance(rs.getInt("distance"));
+					app11.setVehicle(rs.getInt("vehicle"));
+					app11.setAmount(rs.getInt("amount"));
+						
+						
+						
+						listcus.add(app11);
+					}
+					return listcus;
+				} catch (Exception e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+	 	 //*****************************************************************************************************************
+	 	 //delete bookings
+	 	  public void del_book(Bill dell)
+			{
+				try {
+					String query="delete from bill where bookingNumber='"+dell.getBookingNumber()+"'";
+					Statement statet=database.getcon().createStatement();
+					statet.executeUpdate(query);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+	 	  //*****************************************************************************************************************
+	 	 //help
+	 	 public help createhelp(String size) {
+	 	        switch (size.toLowerCase()) {
+	 	            case "low":
+	 	                return new help("Apple"); // Create Apple phone for low size
+	 	            case "medium":
+	 	                return new help("Huawei"); // Create Huawei phone for medium size
+	 	            case "large":
+	 	                return new help("Nokia"); // Create Nokia phone for large size
+	 	            default:
+	 	                return null; // Return null if no valid size is provided
+	 	        }
+	 	    }
+		
 }
