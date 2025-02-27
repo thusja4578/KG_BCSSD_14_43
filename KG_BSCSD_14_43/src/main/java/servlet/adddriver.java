@@ -39,18 +39,24 @@ public class adddriver extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	Driver app1=new Driver();
-	app1.setDriverid(request.getParameter("driverid"));
-	app1.setName(request.getParameter("name"));
-	app1.setAddress(request.getParameter("address"));
-	app1.setContact(Integer.parseInt(request.getParameter("contact")));
-	app1.setDob(request.getParameter("dob"));
-	app1.setIdnum(request.getParameter("idnum"));
-	app1.setLicen(request.getParameter("licen"));
-	web_service app2=new web_service();
-	app2.add_driver(app1);
-	RequestDispatcher dis=request.getRequestDispatcher("home.jsp");
-	dis.forward(request, response);
+		Driver app1 = new Driver();
+		app1.setDriverid(request.getParameter("driverid"));
+		app1.setName(request.getParameter("name"));
+		app1.setAddress(request.getParameter("address"));
+		app1.setContact(Integer.parseInt(request.getParameter("contact")));
+		app1.setDob(request.getParameter("dob"));
+		app1.setIdnum(request.getParameter("idnum"));
+		app1.setLicen(request.getParameter("licen"));
+
+		web_service app2 = new web_service();
+		boolean success = app2.add_driver(app1); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('Driver added successfully!'); window.location='home.jsp';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('Driver addition failed. Please try again!'); window.location='register.jsp';</script>");
+		}
+
 	
 	}
 

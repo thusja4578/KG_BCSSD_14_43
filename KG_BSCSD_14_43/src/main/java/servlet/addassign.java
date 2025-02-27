@@ -39,14 +39,19 @@ public class addassign extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Assignment app1=new Assignment ();
+		Assignment app1 = new Assignment();
 		app1.setDriverId(request.getParameter("did"));
 		app1.setVehicleId(request.getParameter("vid"));
-		web_service app2=new web_service();
-		app2.reg_as(app1);
-RequestDispatcher dispatcher=request.getRequestDispatcher("home.jsp");
-		
-		dispatcher.forward(request, response);
+
+		web_service app2 = new web_service();
+		boolean success = app2.reg_as(app1); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('Registration Successful!'); window.location='home.jsp';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('Registration Failed. Please try again!'); window.location='register.jsp';</script>");
+		}
+
 	}
 
 }

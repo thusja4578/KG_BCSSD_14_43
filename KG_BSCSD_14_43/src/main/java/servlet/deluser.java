@@ -40,15 +40,18 @@ public class deluser extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-register dell=new register();
-		
-		
-	
+		register dell = new register();
 		dell.setRegistration_number(request.getParameter("registration_number"));
-		web_service del_ser=new web_service();
-		del_ser.del_user(dell);
-		RequestDispatcher dis=request.getRequestDispatcher("usertb");
-		dis.forward(request, response);
+
+		web_service del_ser = new web_service();
+		boolean success = del_ser.del_user(dell); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('User deleted successfully!'); window.location='usertb';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('User deletion failed. Please try again!'); window.location='usertb';</script>");
+		}
+
 	}
 
 }

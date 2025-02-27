@@ -33,24 +33,23 @@ public class logcus extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		register user_log=new register();
+		register user_log = new register();
 		user_log.setUsername(request.getParameter("username"));
 		user_log.setPassword(request.getParameter("password"));
-		web_service serve=new web_service();
-		boolean status=serve.validate(user_log);
-		
-		
-		if(status) { //condition eken ena answer eka true hari false nisa mehema danna puluwan
-			register loggedcus= serve.getone(user_log);
-			request.setAttribute("customer", loggedcus);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
-			dispatcher.forward(request, response);
-		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-			dispatcher.forward(request, response);
+
+		web_service serve = new web_service();
+		boolean status = serve.validate(user_log);
+
+		if (status) { // If login is successful
+		    register loggedcus = serve.getone(user_log);
+		    request.setAttribute("customer", loggedcus);
+		    response.getWriter().println("<script>alert('Login Successful!'); window.location='profile.jsp';</script>");
+		} else { // If login fails
+		    response.getWriter().println("<script>alert('Login Failed. Please check your credentials and try again!'); window.location='register.jsp';</script>");
 		}
 		doGet(request, response);
+
 	}
-	}
+}
 
 

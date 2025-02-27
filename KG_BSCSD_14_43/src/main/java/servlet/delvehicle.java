@@ -40,15 +40,18 @@ public class delvehicle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-Vehicle dell=new Vehicle();
-		
-		
-		
+		Vehicle dell = new Vehicle();
 		dell.setIdnum(request.getParameter("idnum"));
-		web_service dell_ser=new web_service();
-		dell_ser.del_vehicle(dell);
-		RequestDispatcher dis=request.getRequestDispatcher("vehicletb");
-		dis.forward(request, response);
+
+		web_service dell_ser = new web_service();
+		boolean success = dell_ser.del_vehicle(dell); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('Vehicle deleted successfully!'); window.location='vehicletb';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('Vehicle deletion failed. Please try again!'); window.location='vehicletb';</script>");
+		}
+
 	}
 	}
 

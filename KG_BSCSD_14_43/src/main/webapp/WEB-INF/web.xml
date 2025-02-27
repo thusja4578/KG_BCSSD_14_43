@@ -201,4 +201,14 @@
 <servlet-name>helpfactory</servlet-name>
 <url-pattern>/helpfactoryy</url-pattern> 
 </servlet-mapping>
+
+<servlet>
+<servlet-name>Updateuser</servlet-name>
+<servlet-class>servlet.Updateuser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>Updateuser</servlet-name>
+<url-pattern>/Updateuserr</url-pattern> 
+</servlet-mapping>
 </web-app>

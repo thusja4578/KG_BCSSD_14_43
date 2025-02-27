@@ -23,7 +23,7 @@ import model.register;
 public class web_service {
 	//**********************************************************************************************************************************************************************************
 	//add vehicle
-	public void add_vehicle(Vehicle app1)
+	public boolean add_vehicle(Vehicle app1)
 	{
 		try {
 			String query="insert into vehicle values ('"+app1.getVehicleid()+"','"+app1.getModel()+"','"+app1.getLicenseplate()+"','"+app1.getBrand()+"','"+app1.getColor()+"','"+app1.getEngine()+"','"+app1.getChasi()+"','"+app1.getName()+"','"+app1.getEmail()+"','"+app1.getPhone()+"','"+app1.getIdnum()+"','"+app1.getProvider()+"','"+app1.getPolicy()+"','"+app1.getExpire()+"')";
@@ -33,10 +33,11 @@ public class web_service {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		return false;
 	}
 	//**********************************************************************************************************************************************************************************
 	//add driver
-	 public void add_driver(Driver app1)
+	 public  boolean add_driver(Driver app1)
 		{
 			try {
 				String query="insert into driver values ('"+app1.getDriverid()+"','"+app1.getName()+"','"+app1.getAddress()+"','"+app1.getContact()+"','"+app1.getDob()+"','"+app1.getIdnum()+"','"+app1.getLicen()+"')";
@@ -46,6 +47,7 @@ public class web_service {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
+			return false;
 		}
 	 //********************************************************************************************************************************************************************************
 	 //assign drivers to vehicle
@@ -162,7 +164,7 @@ public class web_service {
 			}
 	        //******************************************************************************************************************************************
 	        //driver delete 
-	        public void del_driver(Driver del)
+	        public boolean del_driver(Driver del)
 			{
 				try {
 					String query="delete from driver where idnum='"+del.getIdnum()+"'";
@@ -172,6 +174,7 @@ public class web_service {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				return false;
 			}
 	        //******************************************************************************************************************************************
 	        //update driver
@@ -298,7 +301,7 @@ public class web_service {
 			}
 	        //**************************************************************************************************************************************************************
 	        //delete vehicle
-	        public void del_vehicle(Vehicle dell)
+	        public boolean del_vehicle(Vehicle dell)
 			{
 				try {
 					String query="delete from vehicle where idnum='"+dell.getIdnum()+"'";
@@ -308,6 +311,7 @@ public class web_service {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				return false;
 			}
 	        //***************************************************************************************************************************************************************
 	        //update vehicle
@@ -438,7 +442,7 @@ public class web_service {
 	 				}
 	 	   //****************************************************************************************************************
 	 	   //delete register
-	 	  public void del_user(register dell)
+	 	  public boolean del_user(register dell)
 			{
 				try {
 					String query="delete from reg where registration_number='"+dell.getRegistration_number()+"'";
@@ -448,6 +452,7 @@ public class web_service {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				return false;
 			}
 	 	  //****************************************************************************************************************
 	 	  //booking table
@@ -510,5 +515,28 @@ public class web_service {
 	 	                return null; // Return null if no valid size is provided
 	 	        }
 	 	    }
-		
+		//*****************************************************************************************************************************
+	 	 //update user
+	 	   public boolean updateuser(String registration_numberr,String namee,String addresss,int nicc,String usernamee,String passwordd) {
+		        try (Connection con = database.getcon()) {
+		            String query = "UPDATE reg SET name=?,address=?,nic=?,username=?,password=? WHERE registration_number = ?"; //database num
+		            PreparedStatement ps = con.prepareStatement(query);
+		          
+		            
+		            ps.setString(1, namee);
+		            ps.setString(2,addresss );
+		            ps.setInt(3, nicc);
+		            ps.setString(4, usernamee);
+		            ps.setString(5, passwordd);
+		            ps.setString(6, registration_numberr);
+		           
+		          
+
+		            int rowsUpdated = ps.executeUpdate();
+		            return rowsUpdated > 0;
+		        } catch (ClassNotFoundException | SQLException e) {
+		            e.printStackTrace();
+		            return false;
+		        }
+		    }
 }

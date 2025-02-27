@@ -39,7 +39,7 @@ public class addvehicle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Vehicle app1=new Vehicle();
+		Vehicle app1 = new Vehicle();
 		app1.setVehicleid(request.getParameter("vehicleid"));
 		app1.setModel(request.getParameter("model"));
 		app1.setLicenseplate(request.getParameter("licenseplate"));
@@ -54,11 +54,16 @@ public class addvehicle extends HttpServlet {
 		app1.setProvider(request.getParameter("provider"));
 		app1.setPolicy(request.getParameter("policy"));
 		app1.setExpire(request.getParameter("expire"));
-		web_service app2=new web_service();
-		app2.add_vehicle(app1);
-		RequestDispatcher dis=request.getRequestDispatcher("home.jsp");
-		dis.forward(request, response);
-		
+
+		web_service app2 = new web_service();
+		boolean success = app2.add_vehicle(app1); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('Vehicle added successfully!'); window.location='home.jsp';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('Vehicle addition failed. Please try again!'); window.location='register.jsp';</script>");
+		}
+
 		
 		
 		

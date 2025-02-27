@@ -40,23 +40,22 @@ public class logvehicle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Vehicle user_log=new Vehicle();
+		Vehicle user_log = new Vehicle();
 		user_log.setModel(request.getParameter("model"));
 		user_log.setLicenseplate(request.getParameter("license_palte"));
-		web_service serve=new web_service();
-		boolean status=serve.validatevehicle(user_log);
-		
-		
-		if(status) { //condition eken ena answer eka true hari false nisa mehema danna puluwan
-			Vehicle loggedcus= serve.getonevehicle(user_log);
-			request.setAttribute("customer", loggedcus);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("vehicleprofile.jsp");
-			dispatcher.forward(request, response);
-		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-			dispatcher.forward(request, response);
+
+		web_service serve = new web_service();
+		boolean status = serve.validatevehicle(user_log);
+
+		if (status) { // If validation is successful
+		    Vehicle loggedcus = serve.getonevehicle(user_log);
+		    request.setAttribute("customer", loggedcus);
+		    response.getWriter().println("<script>alert('Vehicle verification successful!'); window.location='vehicleprofile.jsp';</script>");
+		} else { // If validation fails
+		    response.getWriter().println("<script>alert('Vehicle verification failed. Please check the details and try again!'); window.location='register.jsp';</script>");
 		}
 		doGet(request, response);
+
 	}
 	}
 

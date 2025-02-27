@@ -40,14 +40,18 @@ public class deldriver extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	Driver del=new Driver();
-		
-		
+		Driver del = new Driver();
 		del.setIdnum(request.getParameter("idnum"));
-		web_service del_ser=new web_service();
-		del_ser.del_driver(del);
-		RequestDispatcher dis=request.getRequestDispatcher("drivertb");
-		dis.forward(request, response);
+
+		web_service del_ser = new web_service();
+		boolean success = del_ser.del_driver(del); // Assuming this method returns a boolean indicating success or failure
+
+		if (success) {
+		    response.getWriter().println("<script>alert('Driver deleted successfully!'); window.location='drivertb';</script>");
+		} else {
+		    response.getWriter().println("<script>alert('Driver deletion failed. Please try again!'); window.location='drivertb';</script>");
+		}
+
 	}
 
 }

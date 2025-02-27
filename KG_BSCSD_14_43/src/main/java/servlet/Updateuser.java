@@ -1,29 +1,25 @@
 package servlet;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Driver;
-
 import service.web_service;
 
 /**
- * Servlet implementation class logdriver
+ * Servlet implementation class Updateuser
  */
-@WebServlet("/logdriver")
-public class logdriver extends HttpServlet {
+@WebServlet("/Updateuser")
+public class Updateuser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public logdriver() {
+    public Updateuser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,21 +36,30 @@ public class logdriver extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Driver user_log = new Driver();
-		user_log.setIdnum(request.getParameter("idnum"));
-		user_log.setLicen(request.getParameter("licen"));
+		/*String registration_number;
+String name;
+String address;
+int nic;
+String username;
+String password;*/
+		
+		String registration_numberr=request.getParameter("registration_number");
+		String namee=request.getParameter("name");
+		String addresss=request.getParameter("address");
+		int nicc=Integer.parseInt(request.getParameter("nic"));
+		String usernamee=request.getParameter("username");
+		String passwordd=request.getParameter("password");
+		
+		 web_service userModell = new  web_service();
+	        boolean isUpdated = userModell.updateuser(registration_numberr,namee,addresss,nicc,usernamee,passwordd);
 
-		web_service serve = new web_service();
-		boolean status = serve.validatedriver(user_log);
+	        if (isUpdated) {
+	            request.setAttribute("message", "User updated successfully!");
+	        } else {
+	            request.setAttribute("message", "Error updating user!");
+	        }
 
-		if (status) { // If login is successful
-		    Driver loggedcus = serve.getonedriver(user_log);
-		    request.setAttribute("customer", loggedcus);
-		    response.getWriter().println("<script>alert('Login Successful!'); window.location='driverprofile.jsp';</script>");
-		} else { // If login fails
-		    response.getWriter().println("<script>alert('Login Failed. Please check your credentials and try again!'); window.location='register.jsp';</script>");
-		}
-		doGet(request, response);
+	        request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 	}
 
